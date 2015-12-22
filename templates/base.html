@@ -116,10 +116,32 @@
                 {% if not HIDE_SITENAME %}{{ SITENAME }}{% endif %}
             </a>
         </div>
+        <!-- Collapsible menu items -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
-                {% for title, link in MENUITEMS %}
-                    <li><a href="{{ link }}">{{ title }}</a></li>
+                {% for title, link in MENUITEMS if title not in ["Search", "Archives"] %}
+                    {% if link is string %}
+                        <li>
+                            <a href="{{ link }}" {{ link }}>{{ title }}</a>
+                        </li>
+                    {% elif link is iterable %}
+                        <li class="btn-group">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                {{- title }}<b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                {% for title,item_link in link %}
+                                    {% if item_link %}
+                                    <li>
+                                        <a href="{{ item_link }}" {{ item_link }}>{{ title }}</a>
+                                    </li>
+				    {% else %}
+				        <li class="divider"></li>
+				    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    {% endif %}
                 {% endfor %}
                 {% if DISPLAY_PAGES_ON_MENU %}
                     {% for p in PAGES %}
@@ -144,7 +166,39 @@
                 </form></span>
               </li>
             {% endif %}
-              <li><a href="{{ SITEURL }}/{{ ARCHIVES_URL | default('archives.html') }}"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+	    {% for title,link in MENUITEMS if title in ['Search', 'Archives'] %}
+                <!-- Search Box -->
+                {% if title == 'Search' %}
+                    <form class="navbar-form navbar-right" role="search"
+			  action="http://www.google.com/cse"
+			  id="searchbox_{{ link }}" target="_blank">
+                        <input type="hidden" name="cx" value="{{ link }}" />
+                        <input type="text" name="q" class="form-control" placeholder="Search">
+		    </form>
+                <!-- Archives -->
+                {% elif link is string %}
+                    <li>
+                        <a href="{{ link }}" {{ link }}>{{ title }}</a>
+                    </li>
+                {% elif link is iterable %}
+                    <li class="btn-group">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                          {{- title }}<b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            {% for title,item_link in link %}
+                                {% if item_link %}
+                                    <li>
+                                        <a href="{{ item_link }}" {{ item_link }}>{{ title }}</a>
+                                    </li>
+				{% else %}
+			            <li class="divider"></li>
+				{% endif %}
+                            {% endfor %}
+                            </ul>
+                        </li>
+                {% endif %}
+	    {% endfor %}
             </ul>
         </div>
         <!-- /.navbar-collapse -->
