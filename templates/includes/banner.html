@@ -1,7 +1,15 @@
+{% set banner = None %}
+{% if page is defined %}
+{% set banner = page.banner %}
+{% elif article is defined %}
+{% set banner = article.banner %}
+{% endif %}
+{% set banner = banner or BANNER %}
 <style>
 	#banner{
-	    background-image:url("{{ SITEURL}}/{{ BANNER }}");
+	    background-image:url("{{ SITEURL}}/{{ banner }}");
 	}
+	/* foo */
 </style>
 
 <div id="banner">
