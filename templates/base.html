@@ -79,6 +79,20 @@
         <link href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/shariff/shariff.min.css" rel="stylesheet">
     {% endif %}
 
+    {% if article %}
+        {% if article.stylesheets %}
+            {% for stylesheet in article.stylesheets %}
+    {{ stylesheet }}
+            {% endfor %}
+        {% endif %}
+    {% elif page %}
+        {% if page.stylesheets %}
+            {% for stylesheet in page.stylesheets %}
+    {{ stylesheet }}
+            {% endfor %}
+        {% endif %}
+    {% endif %}
+
     {% if FEED_ALL_ATOM %}
         <link href="{{ SITEURL }}/{{ FEED_ALL_ATOM }}" type="application/atom+xml" rel="alternate"
               title="{{ SITENAME }} ATOM Feed"/>
@@ -255,6 +269,19 @@
 {% include 'includes/ga.html' %}
 {% include 'includes/piwik.html' %}
 
+{% if article %}
+    {% if article.javascripts %}
+        {% for javascript in article.javascripts %}
+{{ javascript }}
+        {% endfor %}
+    {% endif %}
+{% elif page %}
+    {% if page.javascripts %}
+        {% for javascript in page.javascripts %}
+{{ javascript }}
+        {% endfor %}
+    {% endif %}
+{% endif %}
 {% block scripts %}{% endblock %}
 </body>
 </html>
