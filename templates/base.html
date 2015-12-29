@@ -1,3 +1,6 @@
+{% if output_file == 'index.html' %}
+  {% set HIDE_SIDEBAR = True %}
+{% endif %}
 <!DOCTYPE html>
 {% if USE_OPEN_GRAPH is not defined %}
     {% set USE_OPEN_GRAPH = True %}
@@ -248,7 +251,7 @@
             {% endif %}
             </aside>
         </div>
-        {% endif %}
+	{% endif %}
     </div>
 </div>
 {% include 'includes/footer.html' %}
