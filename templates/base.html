@@ -219,7 +219,7 @@
     </div>
 </div> <!-- /.navbar -->
 <!-- Banner -->
-{% if BANNER and (BANNER_ALL_PAGES or (output_file == 'index.html')) %}
+{% if BANNER and BANNER_ALL_PAGES %}
     {% include 'includes/banner.html' %}
 {% elif BANNER and not BANNER_ALL_PAGES %}
     {% block banner %}{% endblock %}
