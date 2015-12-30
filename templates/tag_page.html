@@ -3,24 +3,27 @@
 {{ super() }}
 <hr/>
     {% if tags %}
-        {% for tag, articles in tags if tag in page.tags %}
-            {% for article in articles %}
-            <article>
-                <h2><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></h2>
-                {% if DISPLAY_ARTICLE_INFO_ON_INDEX %}
-                    <div class="well well-sm">
-                        {% include "includes/article_info.html" %}
-                    </div>
-                {% endif %}
-                <div class="summary">{{ article.summary }}
-                    {% include 'includes/comment_count.html' %}
-                    <a class="btn btn-default btn-xs" href="{{ SITEURL }}/{{ article.url }}">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            {% endfor %}
-        {% endfor %}
-    {% endif %}
 
     {% include 'includes/pagination.html' %}
+        <div class="panel-group" id="accordion">
+        {% for tag, articles in tags if tag in page.tags %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse-{{tag.slug}}">Read more about {{ tag }}... <span class="badge pull-right">{{ articles|count }}</span></a>
+                    </h4>
+                </div>
+                <div id="collapse-{{tag.slug}}" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        {% for article in articles %}
+                        <p><span class="categories-timestamp"><time datetime="{{ article.date.isoformat() }}">{{ article.locale_date }}</time></span> <a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    {% endif %}
+
 {% endblock %}
