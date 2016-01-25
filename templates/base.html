@@ -180,13 +180,6 @@
                 {% endif %}
             </ul>
             <ul class="nav navbar-nav navbar-right">
-            {% if 'tipue_search' in PLUGINS %}
-              <li><span>
-                <form class="navbar-search" action="{{ SEARCH_URL | default('/search.html') }}">
-                  <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input" required>
-                </form></span>
-              </li>
-            {% endif %}
 	    {% for title,link in MENUITEMS if title in ['Search', 'Archives'] %}
                 <!-- Search Box -->
                 {% if title == 'Search' %}
@@ -220,6 +213,13 @@
                         </li>
                 {% endif %}
 	    {% endfor %}
+            {% if 'tipue_search' in PLUGINS %}
+              <li><span>
+                <form class="navbar-search" action="{{ SEARCH_URL | default('/search.html') }}">
+                  <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input" required>
+                </form></span>
+              </li>
+            {% endif %}
             </ul>
         </div>
         <!-- /.navbar-collapse -->
