@@ -1,8 +1,8 @@
-{% if DISQUS_SITENAME %}
+{% if DISQUS_SITENAME or 'googleplus_comments' in PLUGINS %}
     <hr/>
     <section class="comments" id="comments">
         <h2>Comments</h2>
-
+{% if DISQUS_SITENAME %}
         <div id="disqus_thread"></div>
         <script type="text/javascript">
             /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
@@ -37,5 +37,11 @@
             Disqus.</a></noscript>
         <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
+{% endif %}
+{% if 'googleplus_comments' in PLUGINS %}
+    <div id="commentswrap">
+      <div id="googleplus-comments"></div>
+    </div>
+{% endif %}
     </section>
 {% endif %}

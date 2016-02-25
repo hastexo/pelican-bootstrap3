@@ -1,0 +1,18 @@
+{% if 'googleplus_comments' in PLUGINS %}
+    <!-- Google Plus comments -->
+    <script src="https://apis.google.com/js/plusone.js"></script>
+    <script>
+        $(document).ready(function () {
+            gapi.comments.render('googleplus-comments', {
+{% if article %}
+                href: '{{ SITEURL }}/{{ article.url }}',
+{% elif page %}
+                href: '{{ SITEURL }}/{{ page.url }}',
+{% endif %}
+                first_party_property: 'BLOGGER',
+                view_type: 'FILTERED_POSTMOD'
+            });
+	});
+    </script>
+    <!-- End Google Plus comments -->
+{% endif %}
