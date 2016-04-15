@@ -116,6 +116,18 @@
               title="{{ SITENAME }} {{ category }} ATOM Feed"/>
     {% endif %}
 
+	<!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent -->
+	<script type="text/javascript">
+     window.cookieconsent_options = {"message": "This web site, or third-party plugins embedded on this site, may use cookies. By continuing to use this site, you agree to cookies being stored on your computer, transmitted across the internet, potentially used for personal identification on social networks, etc. etc. If you disagree with the aforementioned, please close your browser window immediately and leave this site. Did you know we're required by law to display this hideous toolbar, and that the only way to make it reliably disappear for you is to store a cookie? Yeah, it's bizarre. We're sorry.",
+				     "dismiss": "Got it!",
+				     "learnMore": "More info",
+				     "link": "/privacy-policy",
+				     "theme": "dark-bottom"};
+	</script>
+
+	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.9/cookieconsent.min.js"></script>
+	<!-- End Cookie Consent plugin -->
+
 </head>
 {% if output_file == 'index.html' %}
 <body class="home">
